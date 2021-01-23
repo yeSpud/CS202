@@ -40,8 +40,8 @@ double cpp_ftoc(const char* str) {
 	return ((temp-32.0) * (5.0/9.0));
 }
 
-double c_ctof(const char* str) { // FIXME
-	char** endPointer;
-	double temp = std::strtod(str, endPointer);
+double c_ctof(const char* str) {
+	char* endPointer;
+	double temp = std::strtod(str, &endPointer);
 	return (temp * (9.0/5.0) + 32.0);
 }
