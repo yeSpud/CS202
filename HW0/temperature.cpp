@@ -33,6 +33,8 @@ int main(int argc, char* argv[]) {
     	std::cout << "Invalid argument given: " << argument << "\nExpected either --ctof or --ftoc" << std::endl;
 	    return -2;
     }
+
+	return 0;
 }
 
 /**
