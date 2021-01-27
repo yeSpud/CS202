@@ -37,23 +37,11 @@ public:
 
 	const char* getName();
 
-	std::vector<int> createVector();
+	std::vector<int> getMyPrivateVector();
 
 	void setName(const char*& newName); // Pass by reference const
 
-	void vectorReference(std::vector<int>& vectorReference); // Pass by reference
-
 	void setMyPrivateVector(std::vector<int> vector); // Pass by value
-
-	std::vector<int> getMyPrivateVector();
-
-	void selfReferenceConst(const MyClass& myClass);
-
-	void selfReference(MyClass& myClass);
-
-	void selfValue(MyClass myClass);
-
-	static MyClass getMyClass();
 
 };
 
