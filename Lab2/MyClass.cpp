@@ -21,9 +21,9 @@ MyClass::MyClass(const char* name):name(name) {
 
 MyClass::~MyClass() {
 	if (std::strcmp(name, "") != 0) {
-		std::cout << "Deconstructor called for " << name << "\n:(" << std::endl;
+		std::cout << "Destructor called for " << name << "\n:(" << std::endl;
 	} else {
-		std::cout << "Deconstructor called.\n:(" << std::endl;
+		std::cout << "Destructor called.\n:(" << std::endl;
 	}
 }
 

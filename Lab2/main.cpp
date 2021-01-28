@@ -11,7 +11,7 @@ int main() {
 	delete myClassPointer;
 
 	std::cout << "\nCreating unique pointer" << std::endl;
-	std::unique_ptr<MyClass> myUniquePtr(new MyClass("My unique class"));
+	std::unique_ptr<MyClass> myUniquePtr = std::make_unique<MyClass>("My unique pointer");
 
 	std::cout << "\nTransferring ownership of unique pointer" << std::endl;
 	std::unique_ptr<MyClass> myUniqueCopy = move(myUniquePtr);
@@ -21,10 +21,10 @@ int main() {
 	std::cout << "Name of my class: " << myUniqueCopy->getName() << std::endl;
 
 	std::cout << "\nCreating shared pointer" << std::endl;
-	std::shared_ptr<MyClass> mySharedPointer(new MyClass("My shared pointer"));
+	std::shared_ptr<MyClass> mySharedPointer = std::make_shared<MyClass>();
 
 	std::cout << "\nCreating another shared pointer based off of the first one" << std::endl;
-	std::shared_ptr<MyClass> myOtherSharedPointer(mySharedPointer);
+	const std::shared_ptr<MyClass>& myOtherSharedPointer(mySharedPointer);
 
 	std::cout << "\nEnd of program" << std::endl;
 
