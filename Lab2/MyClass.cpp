@@ -5,6 +5,7 @@
 #include "MyClass.hpp"
 #include <iostream>
 #include <vector>
+#include <cstring>
 
 MyClass::MyClass():name("") {
 	std::cout << "Default constructor called." << std::endl;
@@ -19,7 +20,11 @@ MyClass::MyClass(const char* name):name(name) {
 }
 
 MyClass::~MyClass() {
-	std::cout << "Deconstructor called.\n:(" << std::endl;
+	if (std::strcmp(name, "") != 0) {
+		std::cout << "Deconstructor called for " << name << "\n:(" << std::endl;
+	} else {
+		std::cout << "Deconstructor called.\n:(" << std::endl;
+	}
 }
 
 /**
