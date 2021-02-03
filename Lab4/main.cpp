@@ -90,6 +90,14 @@ void appendToFile(const std::string& filePath, int n, const std::string& str) {
 	// Open our file for writing in append mode.
 	std::ofstream outFile(filePath, std::ofstream::app);
 
+	// Make sure the file stream is valid
+	if (outFile.fail()) {
+		std::cout << "File stream error.\n(Is the file path valid?)" << std::endl;
+
+		// Just return early.
+		return;
+	}
+
 	for (int i = 0; i < n; i++) {
 		// Im choosing to add a new line before the input for style reasons.
 		// If the string literally needs to be appended with nothing fancy added before and after feel free to remove.
