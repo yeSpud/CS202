@@ -11,7 +11,7 @@
 
 void readFromFile(const std::string& filePath);
 void getInputs(int& n, std::string& str);
-void appendToFile(const std::string& filePath, const int n, const std::string str);
+void appendToFile(const std::string& filePath, int n, const std::string& str);
 
 int main(int argc, char *argv[]) {
 
@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	// Read the contents of the file. This function should output to the console.
-	//readFromFile(argv[1]);
+	readFromFile(argv[1]);
 
 	// Get our inputs.
 	int n;
@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
 	getInputs(n, str);
 
 	// Append the string to the file n number of times.
-	//appendToFile(argv[1], n, str);
+	appendToFile(argv[1], n, str);
 
 	return 0;
 }
@@ -85,6 +85,16 @@ void getInputs(int& n, std::string& str) {
 	str.replace(0, 1, "");
 }
 
-void appendToFile(const std::string& filePath, const int n, const std::string str) {
-	// TODO
+void appendToFile(const std::string& filePath, int n, const std::string& str) {
+
+	// Open our file for writing in append mode.
+	std::ofstream outFile(filePath, std::ofstream::app);
+
+	for (int i = 0; i < n; i++) {
+		// Im choosing to add a new line before the input for style reasons.
+		// If the string literally needs to be appended with nothing fancy added before and after feel free to remove.
+		outFile << "\n" << str;
+	}
+
+	// We could close the file here, but the destructor does that for us.
 }
