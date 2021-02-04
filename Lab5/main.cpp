@@ -18,6 +18,11 @@ int main() {
 	std::vector<int> inputs;
 	while (!infile.eof()) {
 		infile.read((char *) &n, sizeof(int));
+
+		if (!infile) {
+			break;
+		}
+
 		inputs.push_back(n);
 		//std::cout << n << std::endl;
 	}
@@ -32,7 +37,7 @@ int main() {
 
 	// Print the sum and average
 	std::cout << "Sum: " << sum << std::endl;
-	std::cout << "Average: " << (sum/inputs.size()) << std::endl;
+	std::cout << "Average: " << ((double) sum/inputs.size()) << std::endl;
 
 	return 0;
 }
