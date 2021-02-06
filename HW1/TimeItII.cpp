@@ -1,7 +1,7 @@
 /**
  * TimeItII.cpp
  * Created by Stephen on 1/29/2021.
- * Whats my purpose?
+ * Tests and times various containers in the C++ standard by reading from books (files on disk).
  */
 
 #include <iostream>
