@@ -15,7 +15,7 @@
 
 std::string readFileAsString(const std::string& filePath);
 std::vector<std::string> readFileAsVector(const std::string& filePath);
-std::list<std::string> readFileAsList(std::string filePath);
+std::list<std::string> readFileAsList(const std::string& filePath);
 std::deque<std::string> readFileAsDeque(std::string filePath);
 
 int main(int argc, char *argv[]) {
@@ -45,7 +45,6 @@ int main(int argc, char *argv[]) {
 		watch.Stop();
 		std::cout << "Sorted vector in " << watch.getSeconds() << "s\n" << std::endl;
 
-		/*
 		watch.Start();
 		std::list<std::string> l = readFileAsList(file);
 		watch.Stop();
@@ -53,12 +52,13 @@ int main(int argc, char *argv[]) {
 		watch.Start();
 		std::find(l.begin(), l.end(), str);
 		watch.Stop();
-		std::cout << "Found '" << str << "' in list in " << watch.getSeconds() << "s" << std::endl;
+		std::cout << "Found '" << str << "' in list in " << watch.getSeconds() << "s" << std::endl; // GOOD TO HERE
 		watch.Start();
-		std::sort(l.begin(), l.end());
+		l.sort();
 		watch.Stop();
 		std::cout << "Sorted list in " << watch.getSeconds() << "s\n" << std::endl;
 
+		/*
 		watch.Start();
 		std::deque<std::string> d = readFileAsDeque(file);
 		watch.Stop();
@@ -127,10 +127,25 @@ std::vector<std::string> readFileAsVector(const std::string& filePath) {
 	return v;
 }
 
-std::list<std::string> readFileAsList(std::string filePath) {
-	// TODO
+std::list<std::string> readFileAsList(const std::string& filePath) {
+
+	// Create a filestream based on file path.
+	std::ifstream file(filePath);
+
+	if (file.fail()) {
+		std::cout << "File stream error.\nIs the file path valid?" << std::endl;
+	}
 
 	std::list<std::string> l;
+
+	// Create a string buffer
+	std::string buff;
+	while (std::getline(file, buff)) {
+
+		// Add the string to the buffer
+		l.push_back(buff);
+	}
+
 	return l;
 }
 
