@@ -13,7 +13,7 @@ class StopWatch {
 
 private:
 
-	std::chrono::time_point<std::chrono::system_clock> startTime, endTime;
+	std::chrono::high_resolution_clock::time_point startTime,  endTime;
 
 public:
 
