@@ -1,7 +1,7 @@
 /**
  * c_style_strings.cpp
  * Created by Stephen on 1/29/2021.
- * Whats my purpose?
+ * Implements our own version of strdup and findx.
  */
 
 #include <iostream>
@@ -11,10 +11,29 @@ char* findx(const char* s, const char* x);
 int sizeOfString(const char* string);
 
 int main(int argc, char *argv[]) {
-	// TODO
 
-	char* test = findx("foobarbaz", "bar");
-	std::cout << test << std::endl;
+	// Test strdup
+	char* oString = (char*)"Foo";
+	char* dString = strdup(oString);
+
+	// Both the strings should be the same at this point
+	std::cout << "oString: " << oString << std::endl;
+	std::cout << "dString: " << dString << std::endl;
+
+	// Change oString
+	oString = (char*)"Bar";
+
+	// At this point oString and dString should be different
+	std::cout << "oString: " << oString << std::endl;
+	std::cout << "dString: " << dString << std::endl;
+
+
+	// Test findx
+	char* test = (char*)"foobarbazq";
+	char* x = (char*)"bar";
+
+	// See where x string starts in the test string (the rest of the test string should also be printed).
+	std::cout << "\n\nFind " << x << " in " << test << ": " << findx(test, x) << std::endl;
 
 	return 0;
 }
@@ -54,6 +73,8 @@ char* findx(const char* s, const char* x) {
 			// Iterate though x string to see if it matches the rest of s
 			bool valid = false;
 			for (int j = 0; j < xSize; j++) {
+
+				// If x does not match s at any point for the rest of the size of x, break
 				if (x[j] != s[i+j]) {
 					valid = false;
 					break;
@@ -62,6 +83,7 @@ char* findx(const char* s, const char* x) {
 				}
 			}
 
+			// If the characters were able to be validated, mark the init pointer where it starts within s, and break.
 			if (valid) {
 				initPointer = i;
 				break;
@@ -69,11 +91,15 @@ char* findx(const char* s, const char* x) {
 		}
 	}
 
+	// Create a new pointer for the character thats the size of the original size minus the offset initpointer.
 	char* ptr = new char[sSize - initPointer];
+
+	// Copy the rest of sString from the initpointer offset to the end of the string.
 	for (int k = 0; k <= sSize - initPointer; k++) {
 		ptr[k] = s[initPointer+k];
 	}
 
+	// Return the new pointer.
 	return ptr;
 }
 
