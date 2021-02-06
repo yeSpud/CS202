@@ -1,7 +1,7 @@
 /**
  * TimeIt.cpp
  * Created by Stephen on 1/29/2021.
- * Whats my purpose?
+ * Times various STL algorithms against varying array sizes.
  */
 
 #include <iostream>
