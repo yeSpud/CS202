@@ -20,11 +20,11 @@ public:
 
 };
 
-bool operator==(const Vector3f &a, const Vector3f &b) {
+inline bool operator==(const Vector3f &a, const Vector3f &b) {
 	return (a.x == b.x) && (a.y == b.y) && (a.z == b.z);
 }
 
-bool operator!=(const Vector3f &a, const Vector3f &b) {
+inline bool operator!=(const Vector3f &a, const Vector3f &b) {
 	return (a.x != b.x) || (a.y != b.y) || (a.z != b.z);
 }
 
