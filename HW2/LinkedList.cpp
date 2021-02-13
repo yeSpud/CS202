@@ -5,6 +5,7 @@
  */
 
 #define CATCH_CONFIG_MAIN
+
 #include "catch.hpp"
 
 #include <iostream>
@@ -12,21 +13,22 @@
 // Create a struct object to act as our node for the linked list.
 struct Value {
 	int data;
-	Value* next;
+	Value *next;
 
 	// Add a constructor to our value struct
-	Value(int val):data(val),next(nullptr) {}
+	explicit Value(int val) : data(val), next(nullptr) {}
 };
 
 // Store the first value of the linked list.
-struct Value* front = nullptr;
+struct Value *front = nullptr;
 
 // Store the last value of the linked list
-struct Value* end = nullptr;
+struct Value *end = nullptr;
 
 void append(int val) {
 
-	Value* newValue = new Value(val);
+	// Create a new value node
+	Value *newValue = new Value(val);
 
 	// Check if the front is null.
 	if (front == nullptr) {
@@ -43,10 +45,9 @@ void append(int val) {
 
 	// Reset the end to our new value as well.
 	end = newValue;
-
 }
 
-void popFront() {
+void pop() {
 
 	// Make sure there is an item to return
 	if (front == nullptr) {
@@ -56,7 +57,7 @@ void popFront() {
 	}
 
 	// Store the previous front.
-	Value* prevFront = front;
+	Value *prevFront = front;
 
 	// Set the new front to be the pointer to the next value.
 	front = front->next;
@@ -68,39 +69,77 @@ void popFront() {
 		end = nullptr;
 	}
 
-	// Get the value from the old front.
-	int val = prevFront->data;
-
 	// Free up the resources from the previous front.
-	delete(prevFront);
+	delete (prevFront);
+}
+
+void insert(int val) {
+
+	// Create a new value node.
+	Value *newValue = new Value(val);
+
+	// Store the previous front.
+	Value *prevFront = front;
+
+	// Set the new front to our new value.
+	front = newValue;
+
+	// Check if the end is null.
+	if (end == nullptr) {
+		// Set the end pointer to our current front.
+		end = front;
+	}
+
+	// Set the next value to our previous front.
+	front->next = prevFront;
 }
 
 TEST_CASE("Queue test") {
 	// Test the expanding queue
 	append(0);
-	REQUIRE(front->data==0);
-	REQUIRE(end->data==0);
+	REQUIRE(front->data == 0);
+	REQUIRE(end->data == 0);
 	append(1);
-	REQUIRE(front->data==0);
-	REQUIRE(end->data==1);
+	REQUIRE(front->data == 0);
+	REQUIRE(end->data == 1);
 	append(2);
-	REQUIRE(front->data==0);
-	REQUIRE(end->data==2);
+	REQUIRE(front->data == 0);
+	REQUIRE(end->data == 2);
 
 	// Test shrinking queue
-	popFront();
-	REQUIRE(front->data==1);
-	REQUIRE(end->data==2);
-	popFront();
-	REQUIRE(front->data==2);
-	REQUIRE(end->data==2);
-	popFront();
+	pop();
+	REQUIRE(front->data == 1);
+	REQUIRE(end->data == 2);
+	pop();
+	REQUIRE(front->data == 2);
+	REQUIRE(end->data == 2);
+	pop();
 	REQUIRE(front == nullptr);
 	REQUIRE(end == nullptr);
 }
 
 TEST_CASE("Stack test") {
-	// TODO
+	// Test the expanding stack
+	insert(0);
+	REQUIRE(front->data == 0);
+	REQUIRE(end->data == 0);
+	insert(1);
+	REQUIRE(front->data == 1);
+	REQUIRE(end->data == 0);
+	insert(2);
+	REQUIRE(front->data == 2);
+	REQUIRE(end->data == 0);
+
+	// Test shrinking stack
+	pop();
+	REQUIRE(front->data == 1);
+	REQUIRE(end->data == 0);
+	pop();
+	REQUIRE(front->data == 0);
+	REQUIRE(end->data == 0);
+	pop();
+	REQUIRE(front == nullptr);
+	REQUIRE(end == nullptr);
 }
 
 TEST_CASE("Insert and Find") {
