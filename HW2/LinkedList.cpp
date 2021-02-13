@@ -25,6 +25,10 @@ struct Value *front = nullptr;
 // Store the last value of the linked list
 struct Value *end = nullptr;
 
+/**
+ * Adds a value to the end of our linked list.
+ * @param val The value to append to the end of our linked list.
+ */
 void append(int val) {
 
 	// Create a new value node
@@ -47,6 +51,9 @@ void append(int val) {
 	end = newValue;
 }
 
+/**
+ * Removes the first entry of our linked list.
+ */
 void pop() {
 
 	// Make sure there is an item to return
@@ -73,6 +80,10 @@ void pop() {
 	delete (prevFront);
 }
 
+/**
+ * Inserts a value into the front of our linked list.
+ * @param val The value to be inserted to the front of our list.
+ */
 void insert(int val) {
 
 	// Create a new value node.
@@ -92,6 +103,31 @@ void insert(int val) {
 
 	// Set the next value to our previous front.
 	front->next = prevFront;
+}
+
+Value* find(int val) {
+
+	// Check that we have values to search.
+	if (front == nullptr) {
+		return nullptr;
+	}
+
+	// Create a variable to store our current entry in our linked list. Start at the front of our linked list.
+	Value* entry = front;
+	do {
+
+		// Check if the entry's value matches our value. If it does, return the value entry (pointer).
+		if (entry->data == val) {
+			return entry;
+		} else {
+
+			// Since the entry wasn't found, move to the next one.
+			entry = entry->next;
+		}
+	} while (entry != nullptr);
+
+	// If we made it to this point simply return a null pointer.
+	return nullptr;
 }
 
 TEST_CASE("Queue test") {
@@ -143,7 +179,13 @@ TEST_CASE("Stack test") {
 }
 
 TEST_CASE("Insert and Find") {
-	// TODO
+	// Test the find function first.
+	REQUIRE(find(0) == nullptr);
+	insert(0);
+	REQUIRE(find(0) != nullptr);
+	REQUIRE(find(1) == nullptr);
+	pop();
+	REQUIRE(find(0) == nullptr);
 }
 
 TEST_CASE("Print") {
