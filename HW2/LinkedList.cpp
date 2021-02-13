@@ -158,6 +158,31 @@ void insertAt(int valueToFind, int val) {
 	entry->next = oldNext;
 }
 
+void printList() {
+
+	// Check that we have entries to iterate over.
+	if (front == nullptr) {
+		return;
+	}
+
+	// Get the starting entry.
+	Value* entry = front;
+	do {
+		// Print the content of the entry (and its pointer).
+		std::cout << entry->data << "(" << entry << ")";
+
+		// Fancy formatting.
+		if (entry->next != nullptr) {
+			std::cout << " -> ";
+		} else {
+			std::cout << std::endl;
+		}
+
+		// Go to the next entry.
+		entry = entry->next;
+	} while (entry != nullptr);
+}
+
 TEST_CASE("Queue test") {
 	// Test the expanding queue
 	append(0);
@@ -228,5 +253,31 @@ TEST_CASE("Insert and Find") {
 }
 
 TEST_CASE("Print") {
-	
+	REQUIRE_NOTHROW(printList());
+
+	// Add stuff to our linked list
+	insert(0);
+	insert(1);
+	insert(2);
+	insert(5);
+	insert(10);
+	insert(50);
+	insert(100);
+	insert(200);
+	insert(201);
+	insert(202);
+
+	REQUIRE_NOTHROW(printList());
+
+	// Clear the linked list.
+	pop();
+	pop();
+	pop();
+	pop();
+	pop();
+	pop();
+	pop();
+	pop();
+	pop();
+	pop();
 }
