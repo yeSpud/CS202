@@ -130,6 +130,34 @@ Value* find(int val) {
 	return nullptr;
 }
 
+/**
+ * Searches the linked list for a specific value, and then adds our entered value after it.
+ * @param valueToFind The value to find.
+ * @param val The value to be inserted.
+ */
+void insertAt(int valueToFind, int val) {
+
+	// Get our found value.
+	Value* foundValue = find(valueToFind);
+
+	// If the found value is null, return early.
+	if (foundValue == nullptr) {
+		return;
+	}
+
+	// Create our new entry.
+	Value* entry = new Value(val);
+
+	// Get the old next entry for our value.
+	Value* oldNext = foundValue->next;
+
+	// Set our new next value to our entry.
+	foundValue->next = entry;
+
+	// Set the next value in our entry to be the old next value.
+	entry->next = oldNext;
+}
+
 TEST_CASE("Queue test") {
 	// Test the expanding queue
 	append(0);
@@ -186,8 +214,19 @@ TEST_CASE("Insert and Find") {
 	REQUIRE(find(1) == nullptr);
 	pop();
 	REQUIRE(find(0) == nullptr);
+
+	// Test the insert function.
+	insert(0);
+	insert(1);
+	insert(3);
+	insertAt(3, 2);
+	REQUIRE(front->next->data==2);
+	pop();
+	pop();
+	pop();
+	pop();
 }
 
 TEST_CASE("Print") {
-	// TODO
+	
 }
