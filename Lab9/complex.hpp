@@ -21,7 +21,7 @@ public:
 
 	friend complex operator+(const complex &c0, const complex &c1);
 
-	friend complex operator+=(complex &c0, const complex &c1);
+	friend complex& operator+=(complex &c0, const complex &c1);
 
 };
 

@@ -16,8 +16,8 @@ complex operator+(const complex &c0, const complex &c1) {
 	return complex(c0.real + c1.real, c0.imaginary + c1.real);
 }
 
-complex operator+=(complex &c0, const complex &c1) {
-	c0.real = c0.real + c1.real;
-	c0.imaginary = c0.imaginary + c1.imaginary;
+complex& operator+=(complex &c0, const complex &c1) {
+	c0.real += c1.real;
+	c0.imaginary += c1.imaginary;
 	return c0;
 }
