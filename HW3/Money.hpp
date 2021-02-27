@@ -1,7 +1,8 @@
 /**
  * Money.hpp
  * Created by Stephen on 2/26/2021.
- * Whats my purpose?
+ * Class that stores money entered as cents.
+ * All overloaded operators are declared here, but implemented in Money.cpp
  */
 
 #ifndef HW3_MONEY_HPP

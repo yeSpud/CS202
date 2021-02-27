@@ -1,7 +1,8 @@
 /**
  * Money.cpp
  * Created by Stephen on 2/26/2021.
- * Whats my purpose?
+ * Implements functions (mostly overloaded operators) declared in Money.hpp.
+ * Also setup the main constructor.
  */
 
 #include "Money.hpp"
@@ -20,12 +21,12 @@ Money::Money(float input) {
 	int floor = (int) input;
 
 	// Use the decimal test to determine if the number is an int or a float.
-	if ((float)floor - input == 0.0) {
+	if ((float) floor - input == 0.0) {
 		// Int
-		cents = (long)input;
+		cents = (long) input;
 	} else {
 		// Float
-		cents = (long)(input * 100);
+		cents = (long) (input * 100);
 	}
 }
 
@@ -39,12 +40,12 @@ std::ostream &operator<<(std::ostream &os, const Money &m) {
 		// Do this by setting it to be a positive value, and just manually insert it.
 		long posVal = m.cents * -1;
 
-		os << "-$" << std::setprecision(2) << std::fixed << (double)posVal/100.0;
+		os << "-$" << std::setprecision(2) << std::fixed << (double) posVal / 100.0;
 
 	} else {
 		// Positive
 
-		os << "$" << std::setprecision(2) << std::fixed << (double)m.cents / 100.0;
+		os << "$" << std::setprecision(2) << std::fixed << (double) m.cents / 100.0;
 	}
 
 	return os;
