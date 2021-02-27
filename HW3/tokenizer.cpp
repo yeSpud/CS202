@@ -16,8 +16,8 @@
 // Declare a struct that we will use
 struct TokenAndPosition {
 	std::string _token;
-	int _line;
-	unsigned int _column;
+	int _line{};
+	unsigned int _column{};
 };
 
 // Declare methods to be implemented later
