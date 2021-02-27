@@ -13,13 +13,13 @@ class Money {
 
 private:
 
-	float dollarValue = 0.0;
+	long cents = 0;
 
 public:
 
 	Money();
 
-	explicit Money(float amount);
+	explicit Money(float input);
 
 	friend std::ostream &operator<<(std::ostream &os, const Money &m);
 
